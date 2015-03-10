@@ -27,7 +27,6 @@ public class Valley : MonoBehaviour {
 		defaultPos = hand.transform.position;
 		posMag = meter.transform.localScale.x / 2;
 
-		rangePercent = rangePercent / 100;
 
 	}
 	void changeWind(){

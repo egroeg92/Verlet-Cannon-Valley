@@ -35,6 +35,14 @@ public class PhysicsBody : MonoBehaviour {
         	forward = -forward;
 		
  		prevX = velocity.x;
+		setAcceleration ();
+
+		velocity += acceleration;
+		position += velocity;
+		transform.position = position;
+
+	}
+	protected void setAcceleration(){
 		if (velocity.x != 0) {
 			acceleration.x = -(valley.airRes * velocity.x) ; 
 		}
@@ -42,23 +50,15 @@ public class PhysicsBody : MonoBehaviour {
 			acceleration.y = -(valley.airRes * velocity.y) ; 
 		}
 		acceleration.y += mass * -gravity;
-		velocity += acceleration;
-		position += velocity;
-		transform.position = position;
-
 	}
 
-	/// <summary>
-	/// Destroies the this.
-	/// </summary>
 	protected void destroyThis(){
 		valley.removeBody (this);	
 		Destroy (this.gameObject);	
 		Destroy (this);
 	}
-	/// <summary>
-	/// 	/// </summary>
-	/// <returns>The forward collision.</returns>
+
+
 	protected GameObject detectForwardCollision(){
 		GameObject collision = null;
 		RaycastHit hit;

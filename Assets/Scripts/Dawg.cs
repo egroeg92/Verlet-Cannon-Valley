@@ -163,7 +163,6 @@ public class Dawg : MonoBehaviour {
 
 			position = position/vertlets.Length;
 			totalVel = totalVel/vertlets.Length;
-			Debug.Log ((Mathf.Abs (totalVel.x) + Mathf.Abs (totalVel.y)));
 			if ((Mathf.Abs (totalVel.x) + Mathf.Abs (totalVel.y) < .03) || 
 			    (position.x < -10) ||
 			    (position.x > 10) ||

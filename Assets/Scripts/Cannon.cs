@@ -20,7 +20,7 @@ public class Cannon : MonoBehaviour {
 	void Start () {
 		valley = GameObject.Find("Valley").GetComponent<Valley> ();
 		rangePercent = valley.rangePercent;
-
+		rangePercent = rangePercent / 100f;
 		identity = transform.rotation;
 		left = true;
 		forward = new Vector3 (1, 0, 0);
@@ -54,8 +54,10 @@ public class Cannon : MonoBehaviour {
 
 	private void shoot(){
 
-		float range = Random.Range (shootSpeed- (shootSpeed * rangePercent), (shootSpeed + shootSpeed * rangePercent));
-		Vector3 velocity = (transform.rotation * new Vector3(1,0,0)) * shootSpeed;
+		float range = Random.Range (shootSpeed - (shootSpeed * rangePercent), (shootSpeed + shootSpeed * rangePercent));
+		Debug.Log (shootSpeed+" : "+(shootSpeed * rangePercent));
+		Debug.Log (range);
+		Vector3 velocity = (transform.rotation * new Vector3(1,0,0)) * range;
 
 		//Debug.Log (velocity);
 		if (left) {

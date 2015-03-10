@@ -22,7 +22,8 @@ public class Verlet : PhysicsBody {
 		ground = g.transform.position.y + g.transform.localScale.y / 2;
 
 		lastPos = transform.position;
-		acceleration = new Vector3 (0, mass * -12f, 0);
+		gravity = mass * 12f;
+		acceleration = new Vector3 (0, -gravity, 0);
 
 		transform.position = transform.position + velocity;
 
@@ -42,6 +43,8 @@ public class Verlet : PhysicsBody {
 		transform.position = nextPos;
 
 		velocity = transform.position - lastPos;
+		setAcceleration ();
+
 		if((nextPos - lastPos).x > 0)
 			forward = new Vector3(1,0,0);
 		else
