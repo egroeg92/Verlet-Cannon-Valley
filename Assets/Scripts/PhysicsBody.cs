@@ -15,7 +15,7 @@ public class PhysicsBody : MonoBehaviour {
 
 	float prevX;
 
-	public static float gravity = 0.005f;
+	public float gravity = 0.005f;
 	float forceGravity = 1;
 
 	// Use this for initialization
@@ -102,10 +102,7 @@ public class PhysicsBody : MonoBehaviour {
 		return collision;
 	}
 
-	/// <summary>
-	/// Detects the bottom collision.
-	/// </summary>
-	/// <returns>The bottom collision.</returns>
+
 	protected GameObject detectBottomCollision(){
 		GameObject collision = null;
 		RaycastHit hit;

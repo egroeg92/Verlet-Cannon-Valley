@@ -8,9 +8,6 @@ public class CannonBall : PhysicsBody {
 		mass = 1;
 		base.Start ();
 
-
-		//Invoke ("destroyThis", 10);
-
 	}
 	
 	// Update is called once per frame

@@ -10,8 +10,6 @@ public class Verlet : PhysicsBody {
 	bool destroy = false;
 	Vector3 lastPos, nextPos;
 
-
-
 	float ground;
 	// Use this for initialization
 	void Start () {
@@ -33,11 +31,11 @@ public class Verlet : PhysicsBody {
 		constraints.Add (c);
 	}
 
+
+	//Verlets don't call PhysicsBody update because they used verlet integration for velocity
 	void Update(){
-		//base.Update ();
+
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-
-
 		nextPos = (2 * transform.position) - lastPos + (acceleration * Mathf.Pow(Time.deltaTime , 2));
 		lastPos = transform.position;
 		transform.position = nextPos;

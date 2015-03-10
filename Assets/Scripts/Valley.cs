@@ -8,7 +8,7 @@ public class Valley : MonoBehaviour {
 	Vector3 wind ;
 
 	public GameObject windMeter;
-	public float rangePercent;
+	public float shootPowerRange;
 	Vector3 defaultPos;
 	float posMag;
 	GameObject meter,hand;

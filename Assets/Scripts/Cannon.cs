@@ -10,7 +10,7 @@ public class Cannon : MonoBehaviour {
 
 	Transform tip;
 	float shootSpeed = 0.15f;
-	float rangePercent;
+	float shootPowerRange;
 	Vector3 forward;
 	Quaternion identity;
 	bool left;
@@ -19,8 +19,8 @@ public class Cannon : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		valley = GameObject.Find("Valley").GetComponent<Valley> ();
-		rangePercent = valley.rangePercent;
-		rangePercent = rangePercent / 100f;
+		shootPowerRange = valley.shootPowerRange;
+		shootPowerRange = shootPowerRange / 100f;
 		identity = transform.rotation;
 		left = true;
 		forward = new Vector3 (1, 0, 0);
@@ -54,8 +54,8 @@ public class Cannon : MonoBehaviour {
 
 	private void shoot(){
 
-		float range = Random.Range (shootSpeed - (shootSpeed * rangePercent), (shootSpeed + shootSpeed * rangePercent));
-		Debug.Log (shootSpeed+" : "+(shootSpeed * rangePercent));
+		float range = Random.Range (shootSpeed - (shootSpeed * shootPowerRange), (shootSpeed + shootSpeed * shootPowerRange));
+		Debug.Log (shootSpeed+" : "+(shootSpeed * shootPowerRange));
 		Debug.Log (range);
 		Vector3 velocity = (transform.rotation * new Vector3(1,0,0)) * range;
 
