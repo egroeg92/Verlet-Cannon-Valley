@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AnimalGenerator.cs" />
      <Compile Include="Assets\Scripts\Cannon.cs" />
      <Compile Include="Assets\Scripts\CannonBall.cs" />
      <Compile Include="Assets\Scripts\Dawg.cs" />
@@ -54,8 +53,6 @@
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
      <Compile Include="Assets\Scripts\Valley.cs" />
      <Compile Include="Assets\Scripts\Verlet.cs" />
-     <Compile Include="Assets\Scripts\lineRender.cs" />
-     <Compile Include="Assets\Scripts\pointMass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,6 +14,8 @@ public class Valley : MonoBehaviour {
 	GameObject meter,hand;
 	ArrayList bodies = new ArrayList();
 
+	public float[] leftWallBounds, rightWallBounds;
+
 
 	// Use this for initialization
 	void Start () {

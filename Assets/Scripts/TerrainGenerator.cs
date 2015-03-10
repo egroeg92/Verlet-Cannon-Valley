@@ -41,8 +41,6 @@ public class TerrainGenerator : MonoBehaviour {
 
 	private void GenerateHeights()
 	{
-		//int mapWidth = terrain.terrainData.heightmapWidth;
-		//int mapHeight = terrain.terrainData.heightmapHeight;
 
 		float secWidth = width/(float)mapWidth;
 		int slopeWidth = mapWidth / 5;
@@ -104,7 +102,6 @@ public class TerrainGenerator : MonoBehaviour {
 				createCannon(cube,true);
 			}
 			index += 1;
-			//Debug.Log (index);
 
 		}
 

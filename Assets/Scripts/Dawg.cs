@@ -7,10 +7,12 @@ public class Dawg : MonoBehaviour {
 	public Verlet b1,b2,b3,b4,t,l1,l2,l3,r1,r2,r3,h1,h2,h3,h4,h5;
 
 
-	public Vector3 velocity,forward;
+	public Vector3 velocity,forward, position;
 	Vector3 shift;
 	bool hitGround;
 	LineRenderer br;
+
+
 	void addDistanceConstraints ()
 	{
 		//body
@@ -98,7 +100,7 @@ public class Dawg : MonoBehaviour {
 		br.SetWidth(0.02F, 0.02F);
 		br.SetVertexCount (24);
 
-
+		position = new Vector3 (0, 0, 0);
 		foreach (Verlet v in vertlets) {
 			v.container = this;
 			v.forward = forward;
@@ -154,10 +156,18 @@ public class Dawg : MonoBehaviour {
 
 			foreach (Verlet v in vertlets) {
 
-					totalVel += v.velocity;
+				totalVel += v.velocity;
+				position += v.transform.position;
+
 			}
 
-			if (Mathf.Abs (totalVel.x) + Mathf.Abs (totalVel.y) < .2) {
+			position = position/vertlets.Length;
+			totalVel = totalVel/vertlets.Length;
+			Debug.Log ((Mathf.Abs (totalVel.x) + Mathf.Abs (totalVel.y)));
+			if ((Mathf.Abs (totalVel.x) + Mathf.Abs (totalVel.y) < .03) || 
+			    (position.x < -10) ||
+			    (position.x > 10) ||
+			    position.y < 0) {
 					Invoke ("destroyAll", 5);
 			}
 		}

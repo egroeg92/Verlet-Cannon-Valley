@@ -44,7 +44,10 @@ public class CannonBall : PhysicsBody {
 				position = new Vector3 (transform.position.x, 0.05f + transform.localScale.y / 2, transform.position.z);
 		}
 		//Debug.Log (Mathf.Abs (velocity.x) + Mathf.Abs (velocity.y));
-		if (Mathf.Abs(velocity.x) + Mathf.Abs(velocity.y) < .02)
+		if ((Mathf.Abs(velocity.x) + Mathf.Abs(velocity.y) < .02)||
+		    transform.position.x > 10 ||
+		    transform.position.x < -10 ||
+		    transform.position.y < -5)
 			Invoke ("destroyThis", 3);
 	}
 

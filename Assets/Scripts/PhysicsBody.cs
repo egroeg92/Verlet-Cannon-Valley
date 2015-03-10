@@ -25,15 +25,12 @@ public class PhysicsBody : MonoBehaviour {
 		position = transform.position;
 		forceGravity = mass * -gravity;
 		acceleration = new Vector3 (0, forceGravity, 0);
-
 		prevX = velocity.x;
 
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
-
-
 		if(velocity.x / (Mathf.Abs(velocity.x)) != prevX/(Mathf.Abs(prevX)))
         	forward = -forward;
 		
@@ -51,12 +48,17 @@ public class PhysicsBody : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Destroies the this.
+	/// </summary>
 	protected void destroyThis(){
 		valley.removeBody (this);	
 		Destroy (this.gameObject);	
 		Destroy (this);
 	}
-
+	/// <summary>
+	/// 	/// </summary>
+	/// <returns>The forward collision.</returns>
 	protected GameObject detectForwardCollision(){
 		GameObject collision = null;
 		RaycastHit hit;
@@ -68,7 +70,7 @@ public class PhysicsBody : MonoBehaviour {
 			else
 				xDist = Mathf.Abs(hit.transform.position.x + hit.transform.localScale.x/2 - (transform.position.x - transform.localScale.x/2 ));
 
-			if(xDist < transform.localScale.x/2  || xDist < 0.06)
+			if(xDist < transform.localScale.x/2  )
 				collision = hit.transform.gameObject;
 			
 
@@ -76,7 +78,9 @@ public class PhysicsBody : MonoBehaviour {
 
 		return collision;
 	}
-
+	/// <summary>
+	///  </summary>
+	/// <returns>The backward collision.</returns>
 	protected GameObject detectBackwardCollision(){
 		GameObject collision = null;
 		RaycastHit hit;
@@ -98,7 +102,10 @@ public class PhysicsBody : MonoBehaviour {
 		return collision;
 	}
 
-
+	/// <summary>
+	/// Detects the bottom collision.
+	/// </summary>
+	/// <returns>The bottom collision.</returns>
 	protected GameObject detectBottomCollision(){
 		GameObject collision = null;
 		RaycastHit hit;

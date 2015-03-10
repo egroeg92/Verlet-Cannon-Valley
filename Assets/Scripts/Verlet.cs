@@ -8,7 +8,7 @@ public class Verlet : PhysicsBody {
 	public Dawg container;
 
 	bool destroy = false;
-	Vector3 lastPos;
+	Vector3 lastPos, nextPos;
 
 
 
@@ -20,9 +20,11 @@ public class Verlet : PhysicsBody {
 		base.Start ();
 		GameObject g = GameObject.Find ("Ground");
 		ground = g.transform.position.y + g.transform.localScale.y / 2;
+
 		lastPos = transform.position;
+		acceleration = new Vector3 (0, mass * -12f, 0);
 
-
+		transform.position = transform.position + velocity;
 
 	}
 
@@ -31,16 +33,26 @@ public class Verlet : PhysicsBody {
 	}
 
 	void Update(){
-		base.Update ();
+		//base.Update ();
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
-		if (transform.position.y - transform.localScale.y / 2 < ground) {
-			transform.position = new Vector3 (transform.position.x, ground + transform.localScale.y / 2, transform.position.z);
-		}
+
+		nextPos = (2 * transform.position) - lastPos + (acceleration * Mathf.Pow(Time.deltaTime , 2));
+		lastPos = transform.position;
+		transform.position = nextPos;
+
+		velocity = transform.position - lastPos;
+		if((nextPos - lastPos).x > 0)
+			forward = new Vector3(1,0,0);
+		else
+			forward = new Vector3(-1,0,0);
+
+		checkBounds ();
+		respectConstraints ();
 		detectForwardCollision ();
 		detectCannonCollision ();
 		detectBottomCollision ();
 
-		respectConstraints ();
 
 	}
 	void LateUpdate(){
@@ -48,24 +60,25 @@ public class Verlet : PhysicsBody {
 			destroyThis();
 		}
 	}
+	void checkBounds(){
+		GameObject collision = base.detectBackwardCollision ();
 
+		if (transform.position.y - transform.localScale.y / 2 < ground) {
+			transform.position = new Vector3 (transform.position.x, ground + transform.localScale.y / 2, transform.position.z);
+		}
+	}
 	public GameObject detectForwardCollision(){
 		GameObject collision = base.detectForwardCollision();
 
 		if (collision != null) {
 			if(collision.name =="Wall" ){
-				velocity = new Vector3(-velocity.x  * coeff, -velocity.y * coeff,velocity.z);
 
 				if(forward.x > 0)
-					transform.position = new Vector3(collision.transform.position.x- collision.transform.localScale.x/2 - transform.localScale.x, transform.position.y, transform.position.z);
+					transform.position = new Vector3(collision.transform.position.x- collision.transform.localScale.x - transform.localScale.x, transform.position.y, transform.position.z);
 				else
-					transform.position = new Vector3(collision.transform.position.x +collision.transform.localScale.x/2+ transform.localScale.x, transform.position.y, transform.position.z);
+					transform.position = new Vector3(collision.transform.position.x +collision.transform.localScale.x+ transform.localScale.x, transform.position.y, transform.position.z);
 
-
-				//forward = -forward;
 			}
-
-
 		}
 
 		return collision;
@@ -77,7 +90,7 @@ public class Verlet : PhysicsBody {
 		foreach (CannonBall o in balls){
 			if(Vector3.Distance(o.transform.position,transform.position) < o.transform.localScale.x/2){
 
-				velocity+= o.velocity * 5;
+				transform.position += o.velocity;
 			}
 
 		}
@@ -88,9 +101,9 @@ public class Verlet : PhysicsBody {
 		GameObject collision = base.detectBottomCollision ();
 		if (collision != null) {
 			if (collision.name == "Ground") {
-				velocity = new Vector3 (velocity.x, -velocity.y * coeff, velocity.z);
-					position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
+				position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
 			}
+
 			
 		} 
 		return collision;
