@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: bb1785c8a4d269e4185cf4c6766815b8
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - cannonBall: {instanceID: 0}
+  - can: {fileID: 100012, guid: dbdbe050e0e795e4f9784c158221ef4d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
