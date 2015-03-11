@@ -110,7 +110,7 @@ public class PhysicsBody : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (transform.position, Vector3.down, out hit)) {
 
-			float yDist = Mathf.Abs( hit.transform.position.y + hit.transform.localScale.y/2 - (transform.position.y - transform.localScale.y/2 ));
+			float yDist = Mathf.Abs( hit.transform.position.y + hit.transform.localScale.y/2 - (transform.position.y ));
 
 			if(yDist < transform.localScale.y/2)
 			{

@@ -32,9 +32,10 @@ public class CannonBall : PhysicsBody {
 		collision = base.detectBottomCollision ();
 
 		if (collision != null) {
-			if (collision.name == "Wall" || collision.name == "Ground") {
-				velocity = new Vector3(velocity.x  , -velocity.y * coeff ,velocity.z);	
-				position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
+			if (collision.name == "Ground") {
+			//	velocity = new Vector3(velocity.x  , -velocity.y * coeff ,velocity.z);	
+			//	position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
+				destroyThis();
 			}
 			
 		} 
