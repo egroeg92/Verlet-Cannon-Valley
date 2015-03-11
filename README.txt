@@ -11,7 +11,7 @@ creates cannons on opposite sides
 -Valley
 
 this is the overall game controlling script.  Change windRange, Air Res and shootPowerRange.
-Default shootSpeed for the cannons is .15f so windRange should not be more than that.
+
 
 -Cannon
 

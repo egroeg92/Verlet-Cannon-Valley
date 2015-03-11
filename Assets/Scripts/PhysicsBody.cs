@@ -13,6 +13,8 @@ public class PhysicsBody : MonoBehaviour {
 
 	public Vector3 forward;
 
+	public Vector3 wind;
+
 	float prevX;
 
 	public float gravity = 0.005f;
@@ -20,6 +22,7 @@ public class PhysicsBody : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
+		wind = Vector3.zero;
 		valley = GameObject.Find("Valley").GetComponent<Valley> ();
 		valley.AddBody (this);
 		position = transform.position;
@@ -35,6 +38,7 @@ public class PhysicsBody : MonoBehaviour {
         	forward = -forward;
 		
  		prevX = velocity.x;
+		velocity += wind;
 		setAcceleration ();
 
 		velocity += acceleration;
@@ -78,9 +82,7 @@ public class PhysicsBody : MonoBehaviour {
 
 		return collision;
 	}
-	/// <summary>
-	///  </summary>
-	/// <returns>The backward collision.</returns>
+
 	protected GameObject detectBackwardCollision(){
 		GameObject collision = null;
 		RaycastHit hit;
@@ -108,7 +110,7 @@ public class PhysicsBody : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (transform.position, Vector3.down, out hit)) {
 
-			float yDist = Mathf.Abs( hit.transform.position.y + hit.transform.localScale.y/2 - (transform.position.y));
+			float yDist = Mathf.Abs( hit.transform.position.y + hit.transform.localScale.y/2 - (transform.position.y - transform.localScale.y/2 ));
 
 			if(yDist < transform.localScale.y/2)
 			{

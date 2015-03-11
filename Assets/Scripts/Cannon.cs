@@ -9,7 +9,7 @@ public class Cannon : MonoBehaviour {
 	public Dawg dawg;
 
 	Transform tip;
-	float shootSpeed = 0.15f;
+	float shootSpeed;
 	float shootPowerRange;
 	Vector3 forward;
 	Quaternion identity;
@@ -20,7 +20,9 @@ public class Cannon : MonoBehaviour {
 	void Start () {
 		valley = GameObject.Find("Valley").GetComponent<Valley> ();
 		shootPowerRange = valley.shootPowerRange;
-		shootPowerRange = shootPowerRange / 100f;
+
+
+		shootSpeed = valley.shootSpeed;
 		identity = transform.rotation;
 		left = true;
 		forward = new Vector3 (1, 0, 0);
@@ -39,6 +41,9 @@ public class Cannon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		shootPowerRange = valley.shootPowerRange;
+
+		shootSpeed = valley.shootSpeed;
 		if (Input.GetKeyDown ("space") && !left) {
 			shoot();
 			setAngle();
@@ -54,12 +59,10 @@ public class Cannon : MonoBehaviour {
 
 	private void shoot(){
 
-		float range = Random.Range (shootSpeed - (shootSpeed * shootPowerRange), (shootSpeed + shootSpeed * shootPowerRange));
-		Debug.Log (shootSpeed+" : "+(shootSpeed * shootPowerRange));
-		Debug.Log (range);
+		float range = Random.Range (shootSpeed - (shootPowerRange), (shootSpeed + shootPowerRange));
+
 		Vector3 velocity = (transform.rotation * new Vector3(1,0,0)) * range;
 
-		//Debug.Log (velocity);
 		if (left) {
 			Dawg Dawg = generatePoints();
 			Dawg.forward = forward;

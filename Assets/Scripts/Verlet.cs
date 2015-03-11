@@ -36,7 +36,9 @@ public class Verlet : PhysicsBody {
 	void Update(){
 
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
 		nextPos = (2 * transform.position) - lastPos + (acceleration * Mathf.Pow(Time.deltaTime , 2));
+		nextPos += wind;
 		lastPos = transform.position;
 		transform.position = nextPos;
 
@@ -102,6 +104,9 @@ public class Verlet : PhysicsBody {
 		GameObject collision = base.detectBottomCollision ();
 		if (collision != null) {
 			if (collision.name == "Ground") {
+				position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
+			}
+			if (collision.name == "Wall") {
 				position = new Vector3 (transform.position.x, collision.transform.position.y + collision.transform.localScale.y / 2 + transform.localScale.y / 2, transform.position.z);
 			}
 

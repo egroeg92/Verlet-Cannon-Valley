@@ -9,6 +9,7 @@ public class Valley : MonoBehaviour {
 
 	public GameObject windMeter;
 	public float shootPowerRange;
+	public float shootSpeed;
 	Vector3 defaultPos;
 	float posMag;
 	GameObject meter,hand;
@@ -33,7 +34,7 @@ public class Valley : MonoBehaviour {
 		float f = Random.Range (-windRange, windRange);
 		wind = new Vector3 (f, 0, 0);
 		foreach (PhysicsBody b in bodies) {
-			b.velocity += wind;
+			b.wind = wind;
 		}
 
 		if (wind.x == 0) {
